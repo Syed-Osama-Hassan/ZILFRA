@@ -41,6 +41,9 @@ jobs:
         
       - name: React Responsive install
         run: npm install react-responsive
+        
+      - name: pure-react-carousel install
+        run: npm install pure-react-carousel
 
       - name: Creating Build
         run: npm run build
