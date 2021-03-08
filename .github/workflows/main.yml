@@ -38,6 +38,9 @@ jobs:
       
       - name: React scroll install
         run: npm install react-scroll
+        
+      - name: React Responsive install
+        run: npm install react-responsive
 
       - name: Creating Build
         run: npm run build
