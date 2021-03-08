@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../button";
 import { Logo } from "../logo";
@@ -27,7 +28,9 @@ export function Navbar(props) {
         <Logo inline />
       </BrandContainer>
       <AccessibilityContainer>
-        <Button small>Get Started</Button>
+        <NavLink to="/Home">
+          <Button small>Get Started</Button>
+        </NavLink>
         <Marginer direction="horizontal" margin="8px" />
       </AccessibilityContainer>
     </NavbarContainer>

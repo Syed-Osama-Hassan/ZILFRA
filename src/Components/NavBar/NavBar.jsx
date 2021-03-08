@@ -12,7 +12,7 @@ const Navbar = () => {
                 <NavLink
                   className="navbar-brand"
                   style={{ float: "right" }}
-                  to="/"
+                  to="/Home"
                 >
                   ZILFRA
                 </NavLink>
@@ -36,7 +36,7 @@ const Navbar = () => {
                       <NavLink
                         className="nav-link active"
                         aria-current="page"
-                        to="/"
+                        to="/Home"
                       >
                         Home
                       </NavLink>
