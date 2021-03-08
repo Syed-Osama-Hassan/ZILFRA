@@ -17,9 +17,10 @@ const LogoImg = styled.img`
   ${({ inline }) =>
     inline &&
     css`
-      width: 24px;
-      height: 24px;
+      width: 60px;
+      height: 45px;
       margin-right: 6px;
+      border-radius: 50%;
     `};
 
   ${({ small }) =>

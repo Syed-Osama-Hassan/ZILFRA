@@ -21,7 +21,7 @@ const TopContainer = styled.div`
 const BackgroundFilter = styled.div`
   width: 100%;
   height: 100%;
-  background-color: rgba(55, 55, 55, 0.89);
+  // background-color: rgba(55, 55, 55, 0.89);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,7 +31,7 @@ const MotivationalText = styled.h1`
   font-size: 34px;
   font-weight: 500;
   line-height: 1.4;
-  color: #fff;
+  color: #000000;
   margin: 0;
   text-align: center;
 `;
