@@ -51,6 +51,9 @@ jobs:
       - name: install @fortawesome/free-brands-svg-icons
         run: npm install @fortawesome/free-brands-svg-icons
         
+      - name: install @fortawesome/react-fontawesome
+        run: npm install @fortawesome/react-fontawesome
+        
       - name: Creating Build
         run: npm run build
             
