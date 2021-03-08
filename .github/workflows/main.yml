@@ -44,7 +44,10 @@ jobs:
         
       - name: pure-react-carousel install
         run: npm install pure-react-carousel
-
+        
+      - name: install @fortawesome/free-brands-svg-icons
+        run: npm install @fortawesome/free-brands-svg-icons
+        
       - name: Creating Build
         run: npm run build
             
