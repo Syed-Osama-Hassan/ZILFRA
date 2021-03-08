@@ -35,6 +35,9 @@ jobs:
         
       - name: styled components
         run: npm install styled-components
+      
+      - name: React scroll install
+        run: npm install react-scroll
 
       - name: Creating Build
         run: npm run build
