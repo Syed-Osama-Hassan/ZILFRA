@@ -48,8 +48,8 @@ jobs:
       - name: install @fortawesome/free-brands-svg-icons
         run: npm install @fortawesome/free-brands-svg-icons
         
-      - name: install @fortawesome/free-brands-svg-icons
-        run: npm install @fortawesome/free-brands-svg-icons
+      - name: install @fortawesome/free-brands-svg-core
+        run:  npm install @fortawesome/fontawesome-svg-core
         
       - name: install @fortawesome/react-fontawesome
         run: npm install @fortawesome/react-fontawesome
