@@ -57,8 +57,8 @@ jobs:
       - name: install @fortawesome/free-solid-svg-icons
         run: npm install @fortawesome/free-solid-svg-icons
         
-      - name: install firebase
-        run: npm install firebase
+      - name: install chalk
+        run: npm install chalk
         
       - name: Creating Build
         run: npm run build
