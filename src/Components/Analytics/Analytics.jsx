@@ -13,7 +13,7 @@ export default function Analytics (){
     return (
         <div>
             <NavBar />
-            <Cards />
+            <Cards data={data}/>
             <Charts data={data} />
         </div>
     )

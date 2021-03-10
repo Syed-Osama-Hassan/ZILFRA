@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     
   });
 
-const Cards = () => {
+const Cards = ({ data }) => {
     const classes = useStyles();
 
     // if(!confirmed){
@@ -37,7 +37,7 @@ const Cards = () => {
                     </Typography>
                     <Typography variant="h5">
                     {/* {confirmed.value} */}
-                    0
+                    {data.loan}
                     </Typography>
                     <Typography variant="body2">
                     Number of Loan Requests
@@ -52,7 +52,7 @@ const Cards = () => {
                     </Typography>
                     <Typography variant="h5">
                     {/* {recovered.value} */}
-                    0
+                    {data.fund}
                     </Typography>
                     <Typography variant="body2">
                     Number of raised funds
@@ -67,7 +67,7 @@ const Cards = () => {
                     </Typography>
                     <Typography variant="h5">
                     {/* {deaths.value} */}
-                    0
+                    {data.Draw}
                     </Typography>
                     <Typography variant="body2">
                     Number of participation in draw                    
