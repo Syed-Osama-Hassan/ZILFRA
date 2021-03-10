@@ -57,8 +57,11 @@ jobs:
       - name: install @fortawesome/free-solid-svg-icons
         run: npm install @fortawesome/free-solid-svg-icons
         
+      - name: install chalk
+        run: npm install chalk
+        
       - name: Creating Build
-        run: npm run build
+        run: yarn build
             
       - name: Installing Surge
         run: npm install -g surge
