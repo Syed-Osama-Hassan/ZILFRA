@@ -1,7 +1,21 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+
 
 const Navbar = () => {
+  const history = useHistory()
+  const {logout} = useAuth()
+
+  async function handleLogout(){
+    try{
+      await logout()
+      history.push('/login')
+    }catch{
+      console.log("Failed to log out")
+    }
+  }
+
   return (
     <>
       <div className="container-fluid nav_bg">
