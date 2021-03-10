@@ -83,6 +83,7 @@ const Navbar = () => {
                         className="nav-link active"
                         aria-current="page"
                         to="#"
+                        onClick={handleLogout}
                       >
                         SignOut
                       </NavLink>
