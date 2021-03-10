@@ -12,6 +12,7 @@ import FundRaiser from "../src/Components/FundRaiser/FundRaiser";
 import Login from "./Components/login/login"
 import Signup from "./Components/signup/signup"
 import ForgotPassword from "./Components/ForgotPassword/ForgotPassword"
+import Analytics from "./Components/Analytics/Analytics"
 import Error from "./Components/Error/Error"
 import UpdateProfile from "./Components/UpdateProfile/UpdateProfile"
 import {AuthProvider} from "./Components/contexts/AuthContext";
@@ -33,6 +34,7 @@ return(
             <PrivateRoute  exact path="/FundRaiser" component={FundRaiser}/>
             <PrivateRoute path="/update-profile" component={UpdateProfile}/>
             <PrivateRoute  exact path="/Draw" component={Draw}/>
+            <PrivateRoute  exact path="/Analytics" component={Analytics}/>
             <Route path="*" component={Error}/>
             </Switch>
             </AuthProvider>

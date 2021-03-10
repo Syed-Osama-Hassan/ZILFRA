@@ -88,6 +88,17 @@ const Navbar = () => {
                         Profile
                       </NavLink>
                       </li>
+
+                      <li className="nav-item">
+                      <NavLink
+                        className="nav-link active"
+                        aria-current="page"
+                        to="/analytics"
+                      >
+                        Analytics
+                      </NavLink>
+                      </li>
+
                     <li className="nav-item">
                       <NavLink
                         className="nav-link active"
@@ -151,6 +162,17 @@ const Navbar = () => {
                         Profile
                       </NavLink>
                       </li>
+                      
+                      <li className="nav-item">
+                      <NavLink
+                        className="nav-link active"
+                        aria-current="page"
+                        to="/analytics"
+                      >
+                        Analytics
+                      </NavLink>
+                      </li>
+
                     <li className="nav-item">
                       <NavLink
                         className="nav-link active"

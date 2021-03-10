@@ -24,12 +24,6 @@ const Home = () => {
                     {" "}
                     Let us deal with your financial matters{" "}
                   </h2>
-                  <div className="mt3">
-                    <a href=" " className="btn-get-started">
-                      {" "}
-                      <strong>Get Started</strong>{" "}
-                    </a>
-                  </div>
                 </div>
                 <div className="col-lg-6 order-1 order-lg-2 header-img">
                   <img
