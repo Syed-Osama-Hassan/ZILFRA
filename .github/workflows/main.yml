@@ -61,7 +61,7 @@ jobs:
         run: npm install chalk
         
       - name: Creating Build
-        run: yarn build
+        run: npm run build
             
       - name: Installing Surge
         run: npm install -g surge
