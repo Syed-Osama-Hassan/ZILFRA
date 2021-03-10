@@ -23,13 +23,13 @@ const Navbar = () => {
           <div className="col-12 mx-auto">
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
               <div className="container-fluid">
-                {/* <NavLink
+                <NavLink
                   className="navbar-brand"
                   style={{ float: "right" }}
                   to="/Home"
                 >
                   ZILFRA
-                </NavLink> */}
+                </NavLink>
                 <button
                   class="navbar-toggler"
                   type="button"
@@ -38,6 +38,7 @@ const Navbar = () => {
                   aria-controls="navbarNavAltMarkup"
                   aria-expanded="false"
                   aria-label="Toggle navigation"
+                  
                 >
                   <span class="navbar-toggler-icon"></span>
                 </button>
