@@ -32,6 +32,8 @@ jobs:
 
       - name: Install Packages
         run: npm install
+      - name: Install packages with lockjson
+        run: npm ci
         
       - name: styled components
         run: npm install styled-components
