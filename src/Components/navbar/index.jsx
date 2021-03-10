@@ -28,7 +28,7 @@ export function Navbar(props) {
         <Logo inline />
       </BrandContainer>
       <AccessibilityContainer>
-        <NavLink to="/Home">
+        <NavLink to="/login">
           <Button small>Get Started</Button>
         </NavLink>
         <Marginer direction="horizontal" margin="8px" />

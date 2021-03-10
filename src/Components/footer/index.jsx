@@ -5,6 +5,7 @@ import { Button } from "../button";
 import { Logo } from "../logo";
 import { Marginer } from "../marginer";
 import { faTwitter, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { NavLink } from "react-router-dom";
 
 const FooterContainer = styled.div`
   width: 100%;
@@ -113,9 +114,10 @@ export function Footer(props) {
       <MotivationalText>
         Register & let us handle your financial matters{" "}
       </MotivationalText>
-      <MotivationalText></MotivationalText>
       <Marginer direction="vertical" margin="1em" />
-      <Button>Register</Button>
+      <NavLink to="/signup">
+        <Button >Register</Button>
+      </NavLink>
       <Marginer direction="vertical" margin="5em" />
       <AccessibilityContainer>
         <PrivacyContainer>
