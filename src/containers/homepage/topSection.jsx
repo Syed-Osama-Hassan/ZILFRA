@@ -2,7 +2,7 @@ import React from "react";
 import { Element, scroller } from "react-scroll";
 import styled from "styled-components";
 
-import BackgroundImg from "../../assets/pictures/background.jpg";
+import BackgroundImg from "../../assets/pictures/background.jpeg";
 import { DownArrow } from "../../Components/downArrow";
 import { Marginer } from "../../Components/marginer";
 import { Navbar } from "../../Components/navbar";
