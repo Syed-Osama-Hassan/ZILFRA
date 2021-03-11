@@ -56,7 +56,7 @@ export function TopSection(props) {
           <Navbar />
           <Marginer direction="vertical" margin="8em" />
           <Marginer direction="vertical" margin="4em" />
-          <h1 style={{color: `${theme.primary}`}}>ZILFRA</h1>
+          <h1>ZILFRA</h1>
           <MotivationalText>The Financial Stability Trio</MotivationalText>
           <Marginer direction="vertical" margin="2em" />
           <DownArrowContainer onClick={scrollToNextSection}>
