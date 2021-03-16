@@ -38,6 +38,12 @@ export function AuthProvider({ children }) {
         return currentUser.updatePassword(password)
     }
 
+    function deleteUser(){
+        if(window.confirm('Are you sure you want to delete your account?')){
+            return currentUser.delete();
+        }
+    }
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
@@ -55,7 +61,8 @@ export function AuthProvider({ children }) {
         logout,
         resetPassword,
         updateEmail,
-        updatePassword
+        updatePassword,
+        deleteUser
     }
 
     return (

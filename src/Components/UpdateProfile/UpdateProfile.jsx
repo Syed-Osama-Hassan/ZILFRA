@@ -7,7 +7,7 @@ export default  function UpdateProfile() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    const { currentUser, updateEmail, updatePassword } = useAuth();
+    const { currentUser, updateEmail, updatePassword, deleteUser } = useAuth();
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory()
@@ -40,6 +40,10 @@ export default  function UpdateProfile() {
 
     }
 
+    function deleteAccount(){
+        deleteUser();
+    }
+
     return (
         <Container  className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh"}}>
         <div className="w-100" style={{ maxWidth: "400px" }}>
@@ -60,7 +64,9 @@ export default  function UpdateProfile() {
                         <Form.Label>Confirm Password</Form.Label>
                         <Form.Control type="password" ref={passwordConfirmRef} placeholder="Leave blank to keep the same"></Form.Control>
                     </Form.Group><br/>
-                    <Button disabled={loading} className="w-100 btn-dark" type="submit">Update</Button>
+                    <Button disabled={loading} className="w-100 btn-dark" type="submit">Update Account</Button>
+                    <br/> <br/>
+                    <Button onClick={deleteAccount} className="w-100 btn-danger" type="submit">Delete Account</Button>
                 </Form>
              </Card.Body>
          </Card>
