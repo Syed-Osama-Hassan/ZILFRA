@@ -5,8 +5,7 @@ import styled from "styled-components";
 import BackgroundImg from "../../assets/pictures/background.jpeg";
 import { DownArrow } from "../../Components/downArrow";
 import { Marginer } from "../../Components/marginer";
-import { Navbar } from "../../Components/navbar";
-import { theme } from "../../theme";
+import { Navbar } from "../../Components/NavBar/nav/index";
 
 const TopContainer = styled.div`
   width: 100%;

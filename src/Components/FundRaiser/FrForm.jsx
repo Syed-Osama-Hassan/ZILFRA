@@ -1,69 +1,59 @@
-import React from "react";
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/FormControl";
-import SendButton from "../SendButton/SendButton";
+import React, { useState, useEffect, useRef } from "react";
 import NavBar from '../NavBar/NavBar';
+import { Form, Button, Card, Alert, Container } from 'react-bootstrap';
+import { useAuth } from '../contexts/AuthContext';
 
 const FrForm = () => {
+  const { currentUser } = useAuth();
+  const [user, setUser] = useState(currentUser.email);
+  const titleRef = useRef();
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const accountRef = useRef();
+
+  useEffect(() => {
+    titleRef.current.focus();
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setMessage('Submit Successful');
+  }
+
   return (
     <>
     <NavBar /> 
-      <div>
-        <div className="container fluid nav_bg">
-          <div className="row">
-            <div className="col-6 mx-auto">
-              <br />
-              <h5>Request Fund Raiser</h5>
-              <InputGroup className="mb-3">
-                <InputGroup.Prepend>
-                  <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  placeholder="Username"
-                  aria-label="Username"
-                  aria-describedby="basic-addon1"
-                />
-              </InputGroup>
+    <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
+        <div className="w-100" style={{ maxWidth: "400px" }}>
+          <Card>
+            <Card.Body>
+              <h2 className="text-center mb-4">Fund Raiser Form</h2>
+              {message && <Alert variant="success">{message}</Alert>}
+              <Form onSubmit={handleSubmit}>
+                <Form.Group id="email">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control plaintext readOnly defaultValue={user} />
+                </Form.Group>
+                <Form.Group id="password">
+                  <Form.Label>Title</Form.Label>
+                  <Form.Control type="text" ref={titleRef} required></Form.Control>
+                </Form.Group><br />
+                <Form.Group id="description">
+                <Form.Label>Description</Form.Label>
+                <Form.Control as="textarea" rows={5} required/>
+                </Form.Group>
+                <br/>
+                <Form.Group id="tel">
+                  <Form.Label>Easy Paisa Number</Form.Label>
+                  <Form.Control type="tel" ref={accountRef} required></Form.Control>
+                </Form.Group><br />
+                <Button disabled={loading} className="w-100 btn-dark" type="submit">Submit</Button>
+              </Form>
 
-              <InputGroup className="mb-3">
-                <FormControl
-                  aria-label="Recipient's username"
-                  aria-describedby="basic-addon2"
-                />
-                <InputGroup.Append>
-                  <InputGroup.Text id="basic-addon2">Name</InputGroup.Text>
-                </InputGroup.Append>
-              </InputGroup>
-              
-              <InputGroup className="mb-3">
-                <InputGroup.Prepend>
-                  <InputGroup.Text id="basic-addon3">
-                    abc@gmail.com
-                  </InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl id="basic-url" aria-describedby="basic-addon3" />
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Rp</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl aria-label="Amount (to the nearest dollar)" />
-                <InputGroup.Append>
-                  <InputGroup.Text>.00</InputGroup.Text>
-                </InputGroup.Append>
-              </InputGroup>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Problem Explaination</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl as="textarea" aria-label="With textarea" />
-              <br/>
-              <SendButton/>
-              </InputGroup>
-            </div>
-          </div>
+            </Card.Body>
+          </Card>
         </div>
-      </div>
+      </Container>
     </>
   );
 };
