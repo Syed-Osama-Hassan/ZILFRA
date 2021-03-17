@@ -3,21 +3,40 @@ import NavBar from '../NavBar/NavBar';
 import { Form, Button, Card, Alert, Container } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 
-const LoanForm = () => {
+const LoanForm = (props) => {
+  // Initial loan form values
+  const initialValues = {
+    email: '',
+    title: '',
+    description: '',
+    easyPaisaAccount: ''
+  }
 
+  const [values, setValues] = useState(initialValues);
   const { currentUser } = useAuth();
   const [user, setUser] = useState(currentUser.email);
   const titleRef = useRef();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const accountRef = useRef();
+  const descriptionRef = useRef();
 
   useEffect(() => {
     titleRef.current.focus();
-  });
+  }), [];
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    // Setting values
+    setValues({
+      "email": currentUser.email,
+      "title": titleRef.current.value,
+      "description": descriptionRef.current.value,
+      "easyPaisaAccount": accountRef.current.value
+    });
+    
+    props.addOrEdit(values);
     setMessage('Submit Successful');
   }
 
@@ -41,7 +60,7 @@ const LoanForm = () => {
                 </Form.Group><br />
                 <Form.Group id="description">
                 <Form.Label>Description</Form.Label>
-                <Form.Control as="textarea" rows={5} required/>
+                <Form.Control as="textarea" rows={5} ref={descriptionRef} required/>
                 </Form.Group>
                 <br/>
                 <Form.Group id="tel">

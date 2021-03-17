@@ -63,7 +63,6 @@ const Cases = () => {
         title="I want to raise 10000 Rupees for my School Fee"
         subheader="March 2, 2021"
       />
-      <CardMedia className={classes.media} image="" title="" />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           Summary of problem

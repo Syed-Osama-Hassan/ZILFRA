@@ -31,7 +31,7 @@ const Navbar = () => {
                   ZILFRA
                 </NavLink>
                 <button
-                  class="navbar-toggler"
+                  className="navbar-toggler"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#navbarNavAltMarkup"
@@ -40,12 +40,12 @@ const Navbar = () => {
                   aria-label="Toggle navigation"
                   
                 >
-                  <span class="navbar-toggler-icon"></span>
+                  <span className="navbar-toggler-icon"></span>
                 </button>
 
                 {/* this will show in small screen */}
-                <div class="collapse" id="navbarNavAltMarkup">
-                  <div class="bg-dark p-4">
+                <div className="collapse" id="navbarNavAltMarkup">
+                  <div className="bg-dark p-4">
                   <ul className="navbar-nav" style={{ marginLeft: "auto" }}>
                     <li className="nav-item">
                       <NavLink
