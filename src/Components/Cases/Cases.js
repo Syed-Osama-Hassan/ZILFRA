@@ -91,7 +91,7 @@ const Cases = () => {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph></Typography>
-          <Typography paragraph>Explaination fo problem</Typography>
+          <Typography paragraph>Explaination of problem</Typography>
           <Typography paragraph></Typography>
           <Typography paragraph></Typography>
           <Typography>Explaination fo problem</Typography>

@@ -1,18 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import NavBar from '../NavBar/NavBar';
 import { Form, Button, Card, Alert, Container } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
+import { storage } from '../../firebase';
 
 const LoanForm = (props) => {
-  // Initial loan form values
-  const initialValues = {
-    email: '',
-    title: '',
-    description: '',
-    easyPaisaAccount: ''
-  }
-
-  const [values, setValues] = useState(initialValues);
+  
+  
   const { currentUser } = useAuth();
   const [user, setUser] = useState(currentUser.email);
   const titleRef = useRef();
@@ -20,26 +14,86 @@ const LoanForm = (props) => {
   const [message, setMessage] = useState('');
   const accountRef = useRef();
   const descriptionRef = useRef();
+  const imageRef = useRef();
+  const [image, setImage] = useState(null);
+  const [url, setURL] = useState('');
+  const [progress, setProgress] = useState(0); // Image upload progress
 
-  useEffect(() => {
-    titleRef.current.focus();
-  }), [];
+  // Initial loan form values
+  const initialValues = {
+    email: currentUser.email,
+    title: '',
+    description: '',
+    easyPaisaAccount: '',
+    imageURL: ''
+  }
+  const [values, setValues] = useState(initialValues);
+
+  function handleDataChange(){
+    
+    if(titleRef.current.value !== ''){
+      setValues({
+        ...values,
+        "title": titleRef.current.value
+      });
+    }
+    if(descriptionRef.current.value !== ''){
+      setValues({
+        ...values,
+        "description": descriptionRef.current.value
+      });
+    }
+    if(accountRef.current.value !== ''){
+      setValues({
+        ...values,
+        "easyPaisaAccount": accountRef.current.value
+      });
+    }
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
+   
 
-    // Setting values
-    setValues({
-      "email": currentUser.email,
-      "title": titleRef.current.value,
-      "description": descriptionRef.current.value,
-      "easyPaisaAccount": accountRef.current.value
-    });
-    
-    props.addOrEdit(values);
+    // Code for upload picture
+    const uploadImage = storage.ref(`loan/${image.name}`).put(image);
+    uploadImage.on(
+      "state_changed",
+      snapshot => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(progress);
+      },
+      error =>{
+        console.log(error)
+      },
+      () => {
+        storage
+        .ref('loan')
+        .child(image.name)
+        .getDownloadURL()
+        .then(url => {
+          setURL(url);
+          setValues({
+            ...values,
+            "imageURL": url
+          });
+          props.addOrEdit(values);
+        });
+      }
+    )
+    let x = document.getElementsByName('loan-form')[0];
+    x.reset();
     setMessage('Submit Successful');
   }
 
+  const handleChange = e =>{
+    if(e.target.files[0]){
+      setImage(e.target.files[0]);
+    }
+  };
+  
   return (
     <>
       <NavBar />
@@ -49,23 +103,27 @@ const LoanForm = (props) => {
             <Card.Body>
               <h2 className="text-center mb-4">Loan Form</h2>
               {message && <Alert variant="success">{message}</Alert>}
-              <Form onSubmit={handleSubmit}>
+              <Form name="loan-form" onSubmit={handleSubmit}>
                 <Form.Group id="email">
                   <Form.Label>Email</Form.Label>
                   <Form.Control plaintext readOnly defaultValue={user} />
                 </Form.Group>
                 <Form.Group id="password">
                   <Form.Label>Title</Form.Label>
-                  <Form.Control type="text" ref={titleRef} required></Form.Control>
+                  <Form.Control onChange={handleDataChange} type="text" ref={titleRef} required></Form.Control>
                 </Form.Group><br />
                 <Form.Group id="description">
-                <Form.Label>Description</Form.Label>
-                <Form.Control as="textarea" rows={5} ref={descriptionRef} required/>
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control onChange={handleDataChange} as="textarea" rows={5} ref={descriptionRef} required />
                 </Form.Group>
-                <br/>
+                <br />
                 <Form.Group id="tel">
                   <Form.Label>Easy Paisa Number</Form.Label>
-                  <Form.Control type="tel" ref={accountRef} required></Form.Control>
+                  <Form.Control onChange={handleDataChange} type="tel" ref={accountRef} required></Form.Control>
+                </Form.Group><br />
+                <Form.Group>
+                  <progress value={progress} max='100' /> <br/>
+                  <Form.File id="image" onChange={handleChange} label="Upload picture relevant to loan" ref={imageRef} />
                 </Form.Group><br />
                 <Button disabled={loading} className="w-100 btn-dark" type="submit">Submit</Button>
               </Form>
