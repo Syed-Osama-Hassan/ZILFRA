@@ -1,12 +1,26 @@
 import React from "react";
 import DCases from "./DCases";
 import DForm from "./DForm";
-import NavBar from '../NavBar/NavBar';
+import firebase from '../../firebase';
+
+const db = firebase.database();
 
 const Draw = () => {
+  // Adding to database
+  const addOrEdit = obj => {
+    const dbRef = db.ref();
+    dbRef.child('draw').push(
+      obj,
+      err =>{
+        if(err){
+          console.log(err);
+        }
+      }
+    )
+  }
 return(
   <>
-  <DForm />
+  <DForm addOrEdit={addOrEdit}/>
   <DCases/>
 </>
 );

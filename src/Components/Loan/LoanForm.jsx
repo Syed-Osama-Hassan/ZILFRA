@@ -17,7 +17,6 @@ const LoanForm = (props) => {
   const imageRef = useRef();
   const [image, setImage] = useState(null);
   const [url, setURL] = useState('');
-  const [progress, setProgress] = useState(0); // Image upload progress
 
   // Initial loan form values
   const initialValues = {
@@ -59,12 +58,7 @@ const LoanForm = (props) => {
     const uploadImage = storage.ref(`loan/${image.name}`).put(image);
     uploadImage.on(
       "state_changed",
-      snapshot => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(progress);
-      },
+      snapshot => {},
       error =>{
         console.log(error)
       },
@@ -122,7 +116,6 @@ const LoanForm = (props) => {
                   <Form.Control onChange={handleDataChange} type="tel" ref={accountRef} required></Form.Control>
                 </Form.Group><br />
                 <Form.Group>
-                  <progress value={progress} max='100' /> <br/>
                   <Form.File id="image" onChange={handleChange} label="Upload picture relevant to loan" ref={imageRef} />
                 </Form.Group><br />
                 <Button disabled={loading} className="w-100 btn-dark" type="submit">Submit</Button>
