@@ -103,7 +103,7 @@ return(
       <tbody>
         {
           Object.keys(fundObjects).map( id =>{
-            return id.email == currentUser.email ?
+            return fundObjects[id].email == currentUser.email ?
              <tr key={id}>
               <td>{fundObjects[id].title}</td>
               <td>{fundObjects[id].description}</td>

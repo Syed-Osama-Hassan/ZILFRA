@@ -15,7 +15,7 @@ const Loan = () => {
 
   useEffect(() => {
     db.child('loan').on('value', snapshot => {
-      if (snapshot.val() !== null) {
+      if (snapshot.val() != null) {
         setLoanObjects({
           ...snapshot.val()
         })
@@ -84,7 +84,6 @@ const Loan = () => {
       <LoanForm {...({ addOrEdit, currentId, loanObjects })} /><hr />
       <h2 className="text-center">Your Loans</h2>
       <Container className="d-flex align-items-center  justify-content-center">
-
         <table className="table table-borderless table-stripped">
           <thead className="thead-light">
             <tr>
@@ -98,7 +97,7 @@ const Loan = () => {
           <tbody>
             {
               Object.keys(loanObjects).map(id => {
-                return id.email == currentUser.email ?
+                return loanObjects[id].email === currentUser.email ?
                   <tr key={id}>
                     <td>{loanObjects[id].title}</td>
                     <td>{loanObjects[id].description}</td>
@@ -112,6 +111,7 @@ const Loan = () => {
                   : ''
               })
             }
+            
           </tbody>
         </table>
       </Container>

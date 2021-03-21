@@ -100,7 +100,7 @@ const Draw = () => {
           <tbody>
             {
               Object.keys(drawObjects).map(id => {
-                return id.email == currentUser.email ?
+                return drawObjects[id].email == currentUser.email ?
                   <tr key={id}>
                     <td>{drawObjects[id].title}</td>
                     <td>{drawObjects[id].description}</td>
