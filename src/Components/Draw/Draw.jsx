@@ -46,7 +46,7 @@ const Draw = () => {
     // Edit data
     else {
       // Delete old photo
-      if (drawObjects[currentId].imageURL !== data.imageURL) {
+      if (drawObjects[currentId].imageURL != data.imageURL) {
         dbStorage.refFromURL(drawObjects[currentId].imageURL).delete();
       }
       db.child(`draw/${currentId}`).set(

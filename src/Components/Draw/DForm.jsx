@@ -119,7 +119,7 @@ const DForm = (props) => {
                   <Form.Control name="easyPaisaAccount" value={values.easyPaisaAccount} onChange={handleDataChange} type="tel" required></Form.Control>
                 </Form.Group><br />
                 <Form.Group>
-                  <Form.File id="cnic" onChange={handleChange} label="Upload CNIC front picture" />
+                  <Form.File id="cnic" onChange={handleChange} label="Upload CNIC front picture" required/>
                 </Form.Group><br />
                 <Button disabled={loading} className="w-100 btn-dark" type="submit">{props.currentId == '' ? "Submit" : "Update"}</Button>
               </Form>
