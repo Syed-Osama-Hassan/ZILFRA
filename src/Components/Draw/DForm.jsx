@@ -5,143 +5,130 @@ import { useAuth } from '../contexts/AuthContext';
 import { storage } from '../../firebase';
 
 const DForm = (props) => {
-    const { currentUser } = useAuth();
-    const [user, setUser] = useState(currentUser.email);
-    const titleRef = useRef('');
-    const amountRef = useRef('');
-    const durationRef = useRef('');
-    const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState('');
-    const accountRef = useRef('');
-    const descriptionRef = useRef();
-    const imageRef = useRef();
-    const [image, setImage] = useState(null);
-    const [url, setURL] = useState('');
+  const { currentUser } = useAuth();
+  const [user, setUser] = useState(currentUser.email);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [image, setImage] = useState(null);
+  const titleRef = useRef();
 
-    // Initial loan form values
-    const initialValues = {
-        email: currentUser.email,
-        title: '',
-        description: '',
-        amount: '',
-        duration: '',
-        easyPaisaAccount: '',
-        imageURL: ''
+  // Initial loan form values
+  const initialValues = {
+    email: currentUser.email,
+    title: '',
+    description: '',
+    amount: '',
+    duration: '',
+    easyPaisaAccount: '',
+    imageURL: ''
+  }
+  const [values, setValues] = useState(initialValues);
+
+  useEffect(() => {
+    if (props.currentId == '') {
+      setValues({
+        ...initialValues
+      })
     }
-    const [values, setValues] = useState(initialValues);
+    else {
+      setValues({
+        ...props.drawObjects[props.currentId]
+      })
+    }
+    titleRef.current.focus();
+  }, [props.currentId, props.drawObjects])
 
-    function handleDataChange(){
-    
-        if(titleRef.current.value !== ''){
-          setValues({
-            ...values,
-            "title": titleRef.current.value
-          });
-        }
-        if(descriptionRef.current.value !== ''){
-          setValues({
-            ...values,
-            "description": descriptionRef.current.value
-          });
-        }
-        if(amountRef.current.value !== ''){
-          setValues({
-            ...values,
-            "amount": amountRef.current.value
-          });
-        }
-        if(durationRef.current.value !== ''){
-          setValues({
-            ...values,
-            "duration": durationRef.current.value
-          });
-        }
-        if(accountRef.current.value !== ''){
-          setValues({
-            ...values,
-            "easyPaisaAccount": accountRef.current.value
-          });
-        }
-      }    
+  const handleDataChange = e => {
+    const name = e.target.name;
+    const value = e.target.value;
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        // Code for upload picture
+    setValues({
+      ...values,
+      [name]: value
+    })
+    setMessage('');
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    // Code for upload picture
     const uploadImage = storage.ref(`draw/${image.name}`).put(image);
     uploadImage.on(
       "state_changed",
-      (snapshot) => {},
-      (error) =>{
+      (snapshot) => { },
+      (error) => {
         console.log(error)
       },
       () => {
         storage
-        .ref('draw')
-        .child(image.name)
-        .getDownloadURL()
-        .then((url) => {
-          props.addOrEdit({...values, imageURL: url});
-        });
+          .ref('draw')
+          .child(image.name)
+          .getDownloadURL()
+          .then((url) => {
+            props.addOrEdit(values, url);
+          });
       }
     )
-    // Clearing form fields
-    let x = document.getElementsByName('draw-form')[0];
-    x.reset();
+    Promise.resolve(uploadImage).then(
+      () => {
         setMessage('Submit Successful');
+        document.getElementsByName('draw-form')[0].reset();
+      }
+    )
+  }
+
+  const handleChange = e => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
     }
+  };
 
-    const handleChange = e =>{
-        if(e.target.files[0]){
-          setImage(e.target.files[0]);
-        }
-      };
+  return (
+    <>
+      <NavBar />
+      <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "90vh" }}>
+        <div className="w-100" style={{ maxWidth: "400px" }}>
+          <Card>
+            <Card.Body>
+              <h2 className="text-center mb-4">Draw Form</h2>
+              {message && <Alert variant="success">{message}</Alert>}
+              <Form name="draw-form" onSubmit={handleSubmit}>
+                <Form.Group id="email">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control plaintext readOnly defaultValue={user} />
+                </Form.Group>
+                <Form.Group id="title">
+                  <Form.Label>Title</Form.Label>
+                  <Form.Control name="title" value={values.title} onChange={handleDataChange} type="text" ref={titleRef} required></Form.Control>
+                </Form.Group><br />
+                <Form.Group id="description">
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control name="description" value={values.description} onChange={handleDataChange} as="textarea" rows={5} required />
+                </Form.Group>
+                <br />
+                <Form.Group id="amount">
+                  <Form.Label>Amount</Form.Label>
+                  <Form.Control name="amount" value={values.amount} onChange={handleDataChange} type="number" min="500" max="50000" required></Form.Control>
+                </Form.Group><br />
+                <Form.Group id="duration">
+                  <Form.Label>Duration</Form.Label>
+                  <Form.Control name="duration" value={values.duration} onChange={handleDataChange} type="number" min="2" max="12" required></Form.Control>
+                </Form.Group><br />
+                <Form.Group id="tel">
+                  <Form.Label>Easy Paisa Number</Form.Label>
+                  <Form.Control name="easyPaisaAccount" value={values.easyPaisaAccount} onChange={handleDataChange} type="tel" required></Form.Control>
+                </Form.Group><br />
+                <Form.Group>
+                  <Form.File id="cnic" onChange={handleChange} label="Upload CNIC front picture" />
+                </Form.Group><br />
+                <Button disabled={loading} className="w-100 btn-dark" type="submit">{props.currentId == '' ? "Submit" : "Update"}</Button>
+              </Form>
 
-    return (
-        <>
-            <NavBar />
-            <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "80vh" }}>
-                <div className="w-100" style={{ maxWidth: "400px" }}>
-                    <Card>
-                        <Card.Body>
-                            <h2 className="text-center mb-4">Draw Form</h2>
-                            {message && <Alert variant="success">{message}</Alert>}
-                            <Form name="draw-form" onSubmit={handleSubmit}>
-                                <Form.Group id="email">
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control plaintext readOnly defaultValue={user} />
-                                </Form.Group>
-                                <Form.Group id="title">
-                                    <Form.Label>Title</Form.Label>
-                                    <Form.Control  onChange={handleDataChange} type="text" ref={titleRef} required></Form.Control>
-                                </Form.Group><br />
-                                <Form.Group id="description">
-                                    <Form.Label>Description</Form.Label>
-                                    <Form.Control  onChange={handleDataChange} as="textarea" rows={5} ref={descriptionRef} required />
-                                </Form.Group>
-                                <br />
-                                <Form.Group id="amount">
-                                    <Form.Label>Amount</Form.Label>
-                                    <Form.Control  onChange={handleDataChange} type="number" ref={amountRef} min="500" max="50000" required></Form.Control>
-                                </Form.Group><br />
-                                <Form.Group id="duration">
-                                    <Form.Label>Duration</Form.Label>
-                                    <Form.Control  onChange={handleDataChange} type="number" ref={durationRef} min="2" max="12" required></Form.Control>
-                                </Form.Group><br />
-                                <Form.Group id="tel">
-                                    <Form.Label>Easy Paisa Number</Form.Label>
-                                    <Form.Control  onChange={handleDataChange} type="tel" ref={accountRef} required></Form.Control>
-                                </Form.Group><br />
-                                <Form.Group>
-                                    <Form.File id="cnic" onChange={handleChange}  label="Upload CNIC front picture" ref={imageRef} />
-                                </Form.Group><br />
-                                <Button disabled={loading} className="w-100 btn-dark" type="submit">Submit</Button>
-                            </Form>
-
-                        </Card.Body>
-                    </Card>
-                </div>
-            </Container>
-        </>
-    );
+            </Card.Body>
+          </Card>
+        </div>
+      </Container>
+    </>
+  );
 };
 export default DForm;

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import NavBar from '../NavBar/NavBar';
 import { Form, Button, Card, Alert, Container } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
@@ -8,52 +8,44 @@ const FrForm = (props) => {
   const { currentUser } = useAuth();
   const [user, setUser] = useState(currentUser.email);
   const titleRef = useRef('');
-  const amountRef = useRef('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
-  const accountRef = useRef('');
-  const descriptionRef = useRef('');
-  const imageRef = useRef();
   const [image, setImage] = useState(null);
-  const [url, setURL] = useState('');
 
   // Initial loan form values
   const initialValues = {
     email: currentUser.email,
     title: '',
     description: '',
-    amount:'',
+    amount: '',
     easyPaisaAccount: '',
     imageURL: ''
   }
   const [values, setValues] = useState(initialValues);
 
-  function handleDataChange(){
-    
-    if(titleRef.current.value !== ''){
+  useEffect(() => {
+    if (props.currentId == '') {
       setValues({
-        ...values,
-        "title": titleRef.current.value
-      });
+        ...initialValues
+      })
     }
-    if(descriptionRef.current.value !== ''){
+    else {
       setValues({
-        ...values,
-        "description": descriptionRef.current.value
-      });
+        ...props.fundObjects[props.currentId]
+      })
     }
-    if(amountRef.current.value !== ''){
-      setValues({
-        ...values,
-        "amount": amountRef.current.value
-      });
-    }
-    if(accountRef.current.value !== ''){
-      setValues({
-        ...values,
-        "easyPaisaAccount": accountRef.current.value
-      });
-    }
+    titleRef.current.focus();
+  }, [props.currentId, props.fundObjects])
+
+  function handleDataChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setValues({
+      ...values,
+      [name]: value
+    })
+    setMessage('');
   }
 
 
@@ -64,36 +56,38 @@ const FrForm = (props) => {
     const uploadImage = storage.ref(`fund-raise/${image.name}`).put(image);
     uploadImage.on(
       "state_changed",
-      (snapshot) => {},
-      (error) =>{
+      (snapshot) => { },
+      (error) => {
         console.log(error)
       },
       () => {
         storage
-        .ref('fund-raise')
-        .child(image.name)
-        .getDownloadURL()
-        .then((url) => {
-          props.addOrEdit({...values, imageURL: url});
-        });
+          .ref('fund-raise')
+          .child(image.name)
+          .getDownloadURL()
+          .then((url) => {
+            props.addOrEdit(values, url);
+          });
       }
     )
-    // Clearing form fields
-    let x = document.getElementsByName('fund-raise-form')[0];
-    x.reset();
-    setMessage('Submit Successful');
+    Promise.resolve(uploadImage).then(
+      () => {
+        setMessage('Submit Successful');
+        document.getElementsByName('fund-raise-form')[0].reset();
+      }
+    )
   }
 
-  const handleChange = e =>{
-    if(e.target.files[0]){
+  const handleChange = e => {
+    if (e.target.files[0]) {
       setImage(e.target.files[0]);
     }
   };
 
   return (
     <>
-    <NavBar /> 
-    <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "80vh" }}>
+      <NavBar />
+      <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "80vh" }}>
         <div className="w-100" style={{ maxWidth: "400px" }}>
           <Card>
             <Card.Body>
@@ -106,25 +100,25 @@ const FrForm = (props) => {
                 </Form.Group>
                 <Form.Group id="title">
                   <Form.Label>Title</Form.Label>
-                  <Form.Control  onChange={handleDataChange} type="text" ref={titleRef} required></Form.Control>
+                  <Form.Control name="title" value={values.title} onChange={handleDataChange} type="text" ref={titleRef} required></Form.Control>
                 </Form.Group><br />
                 <Form.Group id="description">
-                <Form.Label>Description</Form.Label>
-                <Form.Control  onChange={handleDataChange} as="textarea" rows={5} ref={descriptionRef} required/>
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control name="description" value={values.description} onChange={handleDataChange} as="textarea" rows={5} required />
                 </Form.Group>
-                <br/>
+                <br />
                 <Form.Group id="amount">
                   <Form.Label>Amount</Form.Label>
-                  <Form.Control  onChange={handleDataChange} type="number" ref={amountRef} min="500" max="50000" required></Form.Control>
+                  <Form.Control name="amount" value={values.amount} onChange={handleDataChange} type="number" min="500" max="50000" required></Form.Control>
                 </Form.Group><br />
                 <Form.Group id="tel">
                   <Form.Label>Easy Paisa Number</Form.Label>
-                  <Form.Control  onChange={handleDataChange} type="tel" ref={accountRef} required></Form.Control>
+                  <Form.Control name="easyPaisaAccount" value={values.easyPaisaAccount} onChange={handleDataChange} type="tel" required></Form.Control>
                 </Form.Group><br />
                 <Form.Group>
-                  <Form.File id="image" onChange={handleChange} label="Upload picture relevant to loan" ref={imageRef} />
+                  <Form.File id="image" onChange={handleChange} label="Upload picture relevant to loan" />
                 </Form.Group><br />
-                <Button disabled={loading} className="w-100 btn-dark" type="submit">Submit</Button>
+                <Button disabled={loading} className="w-100 btn-dark" type="submit">{props.currentId == '' ? "Submit" : "Update"}</Button>
               </Form>
 
             </Card.Body>
