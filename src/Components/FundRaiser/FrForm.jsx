@@ -78,6 +78,7 @@ const FrForm = (props) => {
         });
       }
     )
+    // Clearing form fields
     let x = document.getElementsByName('fund-raise-form')[0];
     x.reset();
     setMessage('Submit Successful');

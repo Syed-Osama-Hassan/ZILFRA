@@ -9,6 +9,7 @@ const DForm = (props) => {
     const [user, setUser] = useState(currentUser.email);
     const titleRef = useRef('');
     const amountRef = useRef('');
+    const durationRef = useRef('');
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
     const accountRef = useRef('');
@@ -23,6 +24,7 @@ const DForm = (props) => {
         title: '',
         description: '',
         amount: '',
+        duration: '',
         easyPaisaAccount: '',
         imageURL: ''
     }
@@ -46,6 +48,12 @@ const DForm = (props) => {
           setValues({
             ...values,
             "amount": amountRef.current.value
+          });
+        }
+        if(durationRef.current.value !== ''){
+          setValues({
+            ...values,
+            "duration": durationRef.current.value
           });
         }
         if(accountRef.current.value !== ''){
@@ -76,6 +84,7 @@ const DForm = (props) => {
         });
       }
     )
+    // Clearing form fields
     let x = document.getElementsByName('draw-form')[0];
     x.reset();
         setMessage('Submit Successful');
@@ -112,7 +121,11 @@ const DForm = (props) => {
                                 <br />
                                 <Form.Group id="amount">
                                     <Form.Label>Amount</Form.Label>
-                                    <Form.Control  onChange={handleDataChange} type="text" ref={amountRef} min="500" max="50000" required></Form.Control>
+                                    <Form.Control  onChange={handleDataChange} type="number" ref={amountRef} min="500" max="50000" required></Form.Control>
+                                </Form.Group><br />
+                                <Form.Group id="duration">
+                                    <Form.Label>Duration</Form.Label>
+                                    <Form.Control  onChange={handleDataChange} type="number" ref={durationRef} min="2" max="12" required></Form.Control>
                                 </Form.Group><br />
                                 <Form.Group id="tel">
                                     <Form.Label>Easy Paisa Number</Form.Label>

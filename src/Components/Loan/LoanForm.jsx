@@ -75,17 +75,16 @@ const LoanForm = (props) => {
           .child(image.name)
           .getDownloadURL()
           .then((url) => {
-            props.addOrEdit({...values, imageURL: url});
+            props.addOrEdit({ ...values, imageURL: url });
           }
           )
 
       }
     )
-   
-      
-      let x = document.getElementsByName('loan-form')[0];
-      x.reset();
-      setMessage('Submit Successful');
+    // Clearing form fields
+    let x = document.getElementsByName('loan-form')[0];
+    x.reset();
+    setMessage('Submit Successful');
 
   }
 
