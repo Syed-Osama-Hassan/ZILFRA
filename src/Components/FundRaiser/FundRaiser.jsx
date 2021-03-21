@@ -86,7 +86,7 @@ const FundRaiser = () => {
 return(
   <>
 <FrForm {...({ addOrEdit, currentId, fundObjects })}/>
-
+<hr/>
 <h2 className="text-center">Your Raise Funds</h2>
   <Container className="d-flex align-items-center  justify-content-center">
     

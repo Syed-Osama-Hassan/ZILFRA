@@ -83,6 +83,7 @@ const Draw = () => {
   return (
     <>
       <DForm {...({ addOrEdit, currentId, drawObjects })} />
+      <hr/>
       <h2 className="text-center">Your Draws</h2>
       <Container className="d-flex align-items-center  justify-content-center">
 
