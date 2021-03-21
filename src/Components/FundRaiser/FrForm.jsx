@@ -7,11 +7,12 @@ import { storage } from '../../firebase';
 const FrForm = (props) => {
   const { currentUser } = useAuth();
   const [user, setUser] = useState(currentUser.email);
-  const titleRef = useRef();
+  const titleRef = useRef('');
+  const amountRef = useRef('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
-  const accountRef = useRef();
-  const descriptionRef = useRef();
+  const accountRef = useRef('');
+  const descriptionRef = useRef('');
   const imageRef = useRef();
   const [image, setImage] = useState(null);
   const [url, setURL] = useState('');
@@ -21,6 +22,7 @@ const FrForm = (props) => {
     email: currentUser.email,
     title: '',
     description: '',
+    amount:'',
     easyPaisaAccount: '',
     imageURL: ''
   }
@@ -40,6 +42,12 @@ const FrForm = (props) => {
         "description": descriptionRef.current.value
       });
     }
+    if(amountRef.current.value !== ''){
+      setValues({
+        ...values,
+        "amount": amountRef.current.value
+      });
+    }
     if(accountRef.current.value !== ''){
       setValues({
         ...values,
@@ -56,8 +64,8 @@ const FrForm = (props) => {
     const uploadImage = storage.ref(`fund-raise/${image.name}`).put(image);
     uploadImage.on(
       "state_changed",
-      snapshot => {},
-      error =>{
+      (snapshot) => {},
+      (error) =>{
         console.log(error)
       },
       () => {
@@ -65,13 +73,8 @@ const FrForm = (props) => {
         .ref('fund-raise')
         .child(image.name)
         .getDownloadURL()
-        .then(url => {
-          setURL(url);
-          setValues({
-            ...values,
-            "imageURL": url
-          });
-          props.addOrEdit(values);
+        .then((url) => {
+          props.addOrEdit({...values, imageURL: url});
         });
       }
     )
@@ -100,7 +103,7 @@ const FrForm = (props) => {
                   <Form.Label>Email</Form.Label>
                   <Form.Control plaintext readOnly defaultValue={user} />
                 </Form.Group>
-                <Form.Group id="password">
+                <Form.Group id="title">
                   <Form.Label>Title</Form.Label>
                   <Form.Control  onChange={handleDataChange} type="text" ref={titleRef} required></Form.Control>
                 </Form.Group><br />
@@ -109,6 +112,10 @@ const FrForm = (props) => {
                 <Form.Control  onChange={handleDataChange} as="textarea" rows={5} ref={descriptionRef} required/>
                 </Form.Group>
                 <br/>
+                <Form.Group id="amount">
+                  <Form.Label>Amount</Form.Label>
+                  <Form.Control  onChange={handleDataChange} type="number" ref={amountRef} min="500" max="50000" required></Form.Control>
+                </Form.Group><br />
                 <Form.Group id="tel">
                   <Form.Label>Easy Paisa Number</Form.Label>
                   <Form.Control  onChange={handleDataChange} type="tel" ref={accountRef} required></Form.Control>

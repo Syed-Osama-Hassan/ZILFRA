@@ -5,44 +5,52 @@ import { useAuth } from '../contexts/AuthContext';
 import { storage } from '../../firebase';
 
 const LoanForm = (props) => {
-  
-  
+
+
   const { currentUser } = useAuth();
   const [user, setUser] = useState(currentUser.email);
-  const titleRef = useRef();
+  const titleRef = useRef('');
+  const amountRef = useRef('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const accountRef = useRef();
-  const descriptionRef = useRef();
+  const descriptionRef = useRef('');
   const imageRef = useRef();
-  const [image, setImage] = useState(null);
-  const [url, setURL] = useState('');
+  const [image, setImage] = useState();
+
 
   // Initial loan form values
   const initialValues = {
     email: currentUser.email,
     title: '',
     description: '',
+    amount: '',
     easyPaisaAccount: '',
     imageURL: ''
   }
   const [values, setValues] = useState(initialValues);
 
-  function handleDataChange(){
-    
-    if(titleRef.current.value !== ''){
+  function handleDataChange() {
+
+    if (titleRef.current.value !== '') {
       setValues({
         ...values,
         "title": titleRef.current.value
       });
     }
-    if(descriptionRef.current.value !== ''){
+    if (descriptionRef.current.value !== '') {
       setValues({
         ...values,
         "description": descriptionRef.current.value
       });
     }
-    if(accountRef.current.value !== ''){
+    if (amountRef.current.value !== '') {
+      setValues({
+        ...values,
+        "amount": amountRef.current.value
+      });
+    }
+    if (accountRef.current.value !== '') {
       setValues({
         ...values,
         "easyPaisaAccount": accountRef.current.value
@@ -50,44 +58,43 @@ const LoanForm = (props) => {
     }
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-   
 
     // Code for upload picture
     const uploadImage = storage.ref(`loan/${image.name}`).put(image);
     uploadImage.on(
       "state_changed",
-      snapshot => {},
-      error =>{
+      (snapshot) => { },
+      (error) => {
         console.log(error)
       },
       () => {
         storage
-        .ref('loan')
-        .child(image.name)
-        .getDownloadURL()
-        .then(url => {
-          setURL(url);
-          setValues({
-            ...values,
-            "imageURL": url
-          });
-          props.addOrEdit(values);
-        });
+          .ref('loan')
+          .child(image.name)
+          .getDownloadURL()
+          .then((url) => {
+            props.addOrEdit({...values, imageURL: url});
+          }
+          )
+
       }
     )
-    let x = document.getElementsByName('loan-form')[0];
-    x.reset();
-    setMessage('Submit Successful');
+   
+      
+      let x = document.getElementsByName('loan-form')[0];
+      x.reset();
+      setMessage('Submit Successful');
+
   }
 
-  const handleChange = e =>{
-    if(e.target.files[0]){
+  const handleChange = e => {
+    if (e.target.files[0]) {
       setImage(e.target.files[0]);
     }
   };
-  
+
   return (
     <>
       <NavBar />
@@ -102,7 +109,7 @@ const LoanForm = (props) => {
                   <Form.Label>Email</Form.Label>
                   <Form.Control plaintext readOnly defaultValue={user} />
                 </Form.Group>
-                <Form.Group id="password">
+                <Form.Group id="title">
                   <Form.Label>Title</Form.Label>
                   <Form.Control onChange={handleDataChange} type="text" ref={titleRef} required></Form.Control>
                 </Form.Group><br />
@@ -111,6 +118,10 @@ const LoanForm = (props) => {
                   <Form.Control onChange={handleDataChange} as="textarea" rows={5} ref={descriptionRef} required />
                 </Form.Group>
                 <br />
+                <Form.Group id="amount">
+                  <Form.Label>Amount</Form.Label>
+                  <Form.Control onChange={handleDataChange} type="number" ref={amountRef} min="500" max="50000" required></Form.Control>
+                </Form.Group><br />
                 <Form.Group id="tel">
                   <Form.Label>Easy Paisa Number</Form.Label>
                   <Form.Control onChange={handleDataChange} type="tel" ref={accountRef} required></Form.Control>
