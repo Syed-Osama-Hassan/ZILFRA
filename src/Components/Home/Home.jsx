@@ -2,12 +2,12 @@ import React from "react";
 import Zilfra from "../../Images/Zilfra.png";
 import "../../styles.css";
 import TrendingCases from "../TrendingCases/TrendingCases";
-import NavBar from "../NavBar/NavBar";
+import Appbar from "../NavBar/NavBar";
 
 const Home = () => {
   return (
     <>
-    <NavBar /> 
+    <Appbar /> 
       <br />
       <section id="header" className="d-flex align-items-center">
         <div className="container fluid nav_bg">

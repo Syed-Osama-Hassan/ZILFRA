@@ -1,9 +1,11 @@
 import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 
-
-const Navbar = () => {
+const Appbar = () => {
   const history = useHistory()
   const {logout} = useAuth()
 
@@ -18,181 +20,90 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="container-fluid nav_bg">
-        <div className="row">
-          <div className="col-12 mx-auto">
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-              <div className="container-fluid">
-                <NavLink
-                  className="navbar-brand"
-                  style={{ float: "right" }}
-                  to="/Home"
-                >
-                  ZILFRA
+      <div className="main">
+        <Navbar style={{margin: "15px"}} collapseOnSelect expand="lg" bg="dark" variant="dark">
+          <Navbar.Brand as={NavLink} style={{paddingLeft: "20px"}} to="/Home">ZILFRA</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav style={{marginLeft:"40%"}}>
+              <Nav.Link>
+                <NavLink style={{color: "inherit", textDecoration: "inherit", fontSize: "large"}} to="/Home">
+                  Home
                 </NavLink>
-                <button
-                  className="navbar-toggler"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarNavAltMarkup"
-                  aria-controls="navbarNavAltMarkup"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                  
-                >
-                  <span className="navbar-toggler-icon"></span>
-                </button>
+              </Nav.Link>
+              
+              <Nav.Link>
+                <NavLink style={{color: "inherit", textDecoration: "inherit", fontSize: "large"}} to="/analytics">
+                  Analytics
+                </NavLink>
+              </Nav.Link>
 
-                {/* this will show in small screen */}
-                <div className="collapse" id="navbarNavAltMarkup">
-                  <div className="bg-dark p-4">
-                  <ul className="navbar-nav" style={{ marginLeft: "auto" }}>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link active"
-                        aria-current="page"
-                        to="/Home"
-                      >
-                        Home
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
-                      <NavLink className="nav-link active" to="/Loan">
-                        Loaning
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link active"
-                        aria-current="page"
-                        to="/FundRaiser"
-                      >
-                        Fund Raisers
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link active"
-                        aria-current="page"
-                        to="/Draw"
-                      >
-                        Draw
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link active"
-                        aria-current="page"
-                        to="/update-profile"
-                      >
-                        Profile
-                      </NavLink>
-                      </li>
+              <NavDropdown title="Loan" id="collasible-nav-dropdown" style={{fontSize: "large"}}>
+                <NavDropdown.Item>
+                  <NavLink style={{color: "inherit", textDecoration: "inherit"}} to="/Loan">
+                     Manage Loans
+                  </NavLink>
+                </NavDropdown.Item>
+                
+                <NavDropdown.Item>
+                  <NavLink style={{color: "inherit", textDecoration: "inherit"}} to="/">
+                     View Loan Requests
+                  </NavLink>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <NavLink style={{color: "inherit", textDecoration: "inherit"}} to="/">
+                     Contributors
+                  </NavLink>
+                </NavDropdown.Item>
 
-                      <li className="nav-item">
-                      <NavLink
-                        className="nav-link active"
-                        aria-current="page"
-                        to="/analytics"
-                      >
-                        Analytics
-                      </NavLink>
-                      </li>
+              </NavDropdown>
 
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link active"
-                        aria-current="page"
-                        to="#"
-                        onClick={handleLogout}
-                      >
-                        Log Out
-                      </NavLink>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+              <NavDropdown title="Fund Raiser" id="collasible-nav-dropdown" style={{fontSize: "large"}}>
+                <NavDropdown.Item>
+                  <NavLink style={{color: "inherit", textDecoration: "inherit"}} to="/FundRaiser">
+                     Manage Funds
+                  </NavLink>
+                </NavDropdown.Item>
+                
+                <NavDropdown.Item>
+                  <NavLink style={{color: "inherit", textDecoration: "inherit"}} to="/">
+                     View Funds Requests
+                  </NavLink>
+                </NavDropdown.Item>
+              </NavDropdown>
 
+              <NavDropdown title="Draw" id="collasible-nav-dropdown" style={{fontSize: "large"}}>
+                <NavDropdown.Item>
+                  <NavLink style={{color: "inherit", textDecoration: "inherit"}} to="/Draw">
+                     Manage Draw
+                  </NavLink>
+                </NavDropdown.Item>
+                
+                <NavDropdown.Item>
+                  <NavLink style={{color: "inherit", textDecoration: "inherit"}} to="/">
+                     View Draw Requests
+                  </NavLink>
+                </NavDropdown.Item>
+              </NavDropdown>
 
-                {/* For large screen */}
-
-                <div
-                  className="collapse navbar-collapse"
-                  id="navbarSupportedContent"
-                >
-                  <ul className="navbar-nav" style={{ marginLeft: "auto" }}>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link active"
-                        aria-current="page"
-                        to="/Home"
-                      >
-                        Home
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
-                      <NavLink className="nav-link active" to="/Loan">
-                        Loaning
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link active"
-                        aria-current="page"
-                        to="/FundRaiser"
-                      >
-                        Fund Raisers
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link active"
-                        aria-current="page"
-                        to="/Draw"
-                      >
-                        Draw
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link active"
-                        aria-current="page"
-                        to="/update-profile"
-                      >
-                        Profile
-                      </NavLink>
-                      </li>
-                      
-                      <li className="nav-item">
-                      <NavLink
-                        className="nav-link active"
-                        aria-current="page"
-                        to="/analytics"
-                      >
-                        Analytics
-                      </NavLink>
-                      </li>
-
-                    <li className="nav-item">
-                      <NavLink
-                        className="nav-link active"
-                        aria-current="page"
-                        to="#"
-                        onClick={handleLogout}
-                      >
-                        Log Out
-                      </NavLink>
-                    </li>
-                  </ul>
-                </div>
-
-
-              </div>
-            </nav>
-          </div>
-        </div>
+              <NavDropdown title="Profile" id="collasible-nav-dropdown" style={{fontSize: "large"}}>
+                <NavDropdown.Item>
+                <NavLink style={{color: "inherit", textDecoration: "inherit", fontSize: "large"}} to="/update-profile">
+                  Edit Profile
+                </NavLink>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <NavLink style={{color: "inherit", textDecoration: "inherit", fontSize: "large"}} to="#" onClick={handleLogout}>
+                    Logout
+                  </NavLink>
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
       </div>
     </>
+
   );
 };
-export default Navbar;
+export default Appbar;
