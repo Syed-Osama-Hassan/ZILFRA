@@ -46,12 +46,12 @@ const Appbar = () => {
                 </NavDropdown.Item>
                 
                 <NavDropdown.Item>
-                  <NavLink style={{color: "inherit", textDecoration: "inherit"}} to="/">
+                  <NavLink style={{color: "inherit", textDecoration: "inherit"}} to="/Loan-Cases">
                      View Loan Requests
                   </NavLink>
                 </NavDropdown.Item>
                 <NavDropdown.Item>
-                  <NavLink style={{color: "inherit", textDecoration: "inherit"}} to="/">
+                  <NavLink style={{color: "inherit", textDecoration: "inherit"}} to="/Contributor">
                      Contributors
                   </NavLink>
                 </NavDropdown.Item>
@@ -66,7 +66,7 @@ const Appbar = () => {
                 </NavDropdown.Item>
                 
                 <NavDropdown.Item>
-                  <NavLink style={{color: "inherit", textDecoration: "inherit"}} to="/">
+                  <NavLink style={{color: "inherit", textDecoration: "inherit"}} to="/FundRaiser-Cases">
                      View Funds Requests
                   </NavLink>
                 </NavDropdown.Item>
@@ -80,7 +80,7 @@ const Appbar = () => {
                 </NavDropdown.Item>
                 
                 <NavDropdown.Item>
-                  <NavLink style={{color: "inherit", textDecoration: "inherit"}} to="/">
+                  <NavLink style={{color: "inherit", textDecoration: "inherit"}} to="/Draw-Cases">
                      View Draw Requests
                   </NavLink>
                 </NavDropdown.Item>
