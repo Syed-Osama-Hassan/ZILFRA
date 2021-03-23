@@ -89,7 +89,7 @@ return(
 <hr/>
 <h2 className="text-center">Your Raise Funds</h2>
   <Container className="d-flex align-items-center  justify-content-center">
-    
+    <div className="w-100" style={{ maxWidth: "800px" }}>
     <table className="table table-borderless table-stripped">
       <thead className="thead-light">
         <tr>
@@ -110,8 +110,12 @@ return(
               <td>{fundObjects[id].amount}</td>
               <td>{fundObjects[id].easyPaisaAccount}</td>
               <td>
-              <Button className="w-50 btn-dark" onClick={() => {setCurrentId(id)}}>Edit</Button>
-              <Button className="w-50 btn-danger" onClick={() => {onDelete(id)}}>Delete</Button>
+              <Button className="w-5 btn-dark" onClick={() => {setCurrentId(id)}}>
+               <i className="fas fa-pencil-alt"></i>
+              </Button>
+              <Button className="w-5 btn-danger" onClick={() => {onDelete(id)}}>
+                <i className="far fa-trash-alt"></i>
+              </Button>
               </td>
             </tr>
             : ''
@@ -119,6 +123,7 @@ return(
         }
       </tbody>
     </table>
+    </div>
   </Container><br /><br /><br /> <hr /><br /><br /><br />
 
 {/* <FrCases/> */}
