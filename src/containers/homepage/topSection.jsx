@@ -2,7 +2,7 @@ import React from "react";
 import { Element, scroller } from "react-scroll";
 import styled from "styled-components";
 
-import BackgroundImg from "../../assets/pictures/background.jpeg";
+import BackgroundImg from "../../assets/pictures/background.svg";
 import { DownArrow } from "../../Components/downArrow";
 import { Marginer } from "../../Components/marginer";
 import { Navbar } from "../../Components/NavBar/nav/index";
@@ -13,7 +13,7 @@ const TopContainer = styled.div`
   padding: 0;
   background-image: url(${BackgroundImg});
   background-repeat: no-repeat;
-  background-size: cover;
+  // background-size: cover;
   position: relative;
 `;
 

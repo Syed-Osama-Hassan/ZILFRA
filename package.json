@@ -11,6 +11,10 @@
     "@emotion/react": "11.1.5",
     "@emotion/styled": "11.1.5",
     "@firebase/database": "0.9.4",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-brands-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "bootstrap": "^5.0.0-beta2",
@@ -21,13 +25,18 @@
     "jquery": "3.5.1",
     "material-ui": "1.0.0-alpha.19",
     "object.assign": "4.1.2",
+    "pure-react-carousel": "^1.27.6",
     "react": "17.0.1",
     "react-bootstrap": "^1.5.0",
     "react-chartjs-2": "^2.11.1",
     "react-dom": "17.0.1",
+    "react-responsive": "^8.2.0",
+    "react-reveal": "^1.2.2",
     "react-router-dom": "5.2.0",
     "react-scripts": "4.0.3",
-    "semver": "7.3.2"
+    "react-scroll": "^1.8.2",
+    "semver": "7.3.2",
+    "styled-components": "^5.2.3"
   },
   "devDependencies": {
     "typescript": "4.1.3"
