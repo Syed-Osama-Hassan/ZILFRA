@@ -33,9 +33,6 @@ jobs:
       - name: Install Packages
         run: npm install
         
-      - name: Install packages with lockjson
-        run: npm ci
-        
       - name: Creating Build
         run: npm run build
             
