@@ -36,33 +36,6 @@ jobs:
       - name: Install packages with lockjson
         run: npm ci
         
-      - name: styled components
-        run: npm install styled-components
-      
-      - name: React scroll install
-        run: npm install react-scroll
-        
-      - name: React Responsive install
-        run: npm install react-responsive
-        
-      - name: pure-react-carousel install
-        run: npm install pure-react-carousel
-        
-      - name: install @fortawesome/free-brands-svg-icons
-        run: npm install @fortawesome/free-brands-svg-icons
-        
-      - name: install @fortawesome/free-brands-svg-core
-        run:  npm install @fortawesome/fontawesome-svg-core
-        
-      - name: install @fortawesome/react-fontawesome
-        run: npm install @fortawesome/react-fontawesome
-        
-      - name: install @fortawesome/free-solid-svg-icons
-        run: npm install @fortawesome/free-solid-svg-icons
-        
-      - name: install chalk
-        run: npm install chalk
-        
       - name: Creating Build
         run: npm run build
             
