@@ -6,7 +6,7 @@ import { Marginer } from "../../Components/marginer";
 import { ReviewCard } from "../../Components/reviewCard";
 import { SectionTitle } from "../../Components/sectionTitle";
 import { useMediaQuery } from "react-responsive";
-
+import Flash from 'react-reveal/Flash';
 import "pure-react-carousel/dist/react-carousel.es.css";
 
 import User1Img from "../../assets/pictures/profile_picture_1.jpg";
@@ -59,6 +59,8 @@ export function ReviewsSection(props) {
   const isMobile = useMediaQuery({ query: "(max-width: 480px)" });
 
   return (
+    <>
+    <Flash duration={1000}>
     <ReviewsContainer>
       <SectionTitle>What people have to say about ZILFRA</SectionTitle>
       <Marginer direction="vertical" margin="3em" />
@@ -88,5 +90,7 @@ export function ReviewsSection(props) {
         <StyledDotGroup />
       </StyledCarouselProvider>
     </ReviewsContainer>
+    </Flash>
+    </>
   );
 }

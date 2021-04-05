@@ -2,7 +2,7 @@ import React from "react";
 import { Element } from "react-scroll";
 import styled from "styled-components";
 import { SectionTitle } from "../../Components/sectionTitle";
-
+import Zoom from 'react-reveal/Zoom';
 import AboutImgUrl from "../../assets/illustrations/rocket_launch_.png";
 
 const MoreAboutContainer = styled(Element)`
@@ -46,6 +46,8 @@ const AboutImg = styled.img`
 
 export function MoreAboutSection(props) {
   return (
+    <>
+    <Zoom bottom wait={1000}>
     <MoreAboutContainer>
       <SectionTitle>Why ZILFRA? </SectionTitle>
       <AboutContainer>
@@ -60,5 +62,7 @@ export function MoreAboutSection(props) {
         <AboutImg src={AboutImgUrl} />
       </AboutContainer>
     </MoreAboutContainer>
+    </Zoom>
+    </>
   );
 }

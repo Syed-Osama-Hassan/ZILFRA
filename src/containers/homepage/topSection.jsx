@@ -1,7 +1,7 @@
 import React from "react";
 import { Element, scroller } from "react-scroll";
 import styled from "styled-components";
-
+import Roll from 'react-reveal/Roll';
 import BackgroundImg from "../../assets/pictures/background.svg";
 import { DownArrow } from "../../Components/downArrow";
 import { Marginer } from "../../Components/marginer";
@@ -55,8 +55,10 @@ export function TopSection(props) {
           <Navbar />
           <Marginer direction="vertical" margin="8em" />
           <Marginer direction="vertical" margin="4em" />
+          <Roll left>
           <h1>ZILFRA</h1>
           <MotivationalText>The Financial Stability Trio</MotivationalText>
+          </Roll>
           <Marginer direction="vertical" margin="2em" />
           <DownArrowContainer onClick={scrollToNextSection}>
             <DownArrow />
