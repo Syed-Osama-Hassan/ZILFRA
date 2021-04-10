@@ -15,11 +15,12 @@ export default function Analytics() {
         "fund": "",
         "Draw": "",
     });
+    const [ready, setReady] = useState(false);
 
     // Fetching data
     useEffect(() => {
         fetchData();
-    }, [])
+    }, [data])
 
     const fetchData = async () => {
         // For loan
@@ -56,9 +57,11 @@ export default function Analytics() {
         })
         //Setting data
         setData({ "loan": l, "fund": f, "Draw": d });
-    
+        setReady(true);
 }
-
+    if(!ready){
+        return <h2>Loading...</h2>
+    }
     return (
         <div>
             <NavBar />
