@@ -41,6 +41,8 @@ const LoanCases = () => {
                             description= {loan[id].description}
                             image={loan[id].imageURL}
                             easyPaisaAccount={loan[id].easyPaisaAccount}
+                            amount = {loan[id].amount}
+                            keys={id}
                             />
                          )
                        })

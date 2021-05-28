@@ -55,6 +55,7 @@ const TrendingCases = () => {
                             description= {fund[id].description}
                             image={fund[id].imageURL}
                             easyPaisaAccount={fund[id].easyPaisaAccount}
+                            amount={fund[id].amount}
                             keys={id}
                             />
                           
@@ -71,6 +72,7 @@ const TrendingCases = () => {
                             description= {loan[id].description}
                             image={loan[id].imageURL}
                             easyPaisaAccount={loan[id].easyPaisaAccount}
+                            amount={loan[id].amount}
                             keys={id}
                             />
                           

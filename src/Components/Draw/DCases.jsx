@@ -42,6 +42,7 @@ const DCases = () => {
                             description= {draw[id].description}
                             easyPaisaAccount={draw[id].easyPaisaAccount}
                             duration={draw[id].duration}
+                            amount = {draw[id].amount}
                             keys={id}
                             />
                          )

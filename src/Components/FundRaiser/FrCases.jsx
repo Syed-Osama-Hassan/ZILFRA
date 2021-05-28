@@ -42,6 +42,8 @@ const FrCases = () => {
                             description= {fund[id].description}
                             image={fund[id].imageURL}
                             easyPaisaAccount={fund[id].easyPaisaAccount}
+                            amount = {fund[id].amount}
+                            keys= {id}
                             />
                          )
                        })
