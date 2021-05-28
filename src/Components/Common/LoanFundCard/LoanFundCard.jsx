@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom';
 const LoanFundCard = (props) => {
     return(
     <div className="col-md-4 col-10 mx-auto"> 
-        <div class="card" style={{width: "20rem"}}>
+        <div class="card anim" style={{width: "20rem"}}>
             <img src={props.image}
             class="card-img-top image-fluid"
             height="300px"
