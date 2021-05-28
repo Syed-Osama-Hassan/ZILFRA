@@ -21,7 +21,7 @@ const Appbar = () => {
   return (
     <>
       <div className="main">
-        <Navbar style={{margin: "15px"}} collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
           <Navbar.Brand as={NavLink} style={{paddingLeft: "20px"}} to="/Home">ZILFRA</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
