@@ -25,7 +25,7 @@ const Appbar = () => {
           <Navbar.Brand as={NavLink} style={{paddingLeft: "20px"}} to="/Home">ZILFRA</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav style={{marginLeft:"40%"}}>
+            <Nav style={{marginLeft:"50%"}}>
               <Nav.Link>
                 <NavLink style={{color: "inherit", textDecoration: "inherit", fontSize: "large"}} to="/Home">
                   Home
