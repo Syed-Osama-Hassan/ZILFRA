@@ -1,51 +1,87 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Cases from "../Cases/Cases";
+import React, { useState, useEffect } from "react";
+import firebase from '../../firebase';
+import LoanFundCard from '../Common/LoanFundCard/LoanFundCard';
 
-const useStyles = makeStyles((theme) => ({
-  text: {
-    padding: theme.spacing(2, 2, 0)
-  },
-  paper: {
-    paddingBottom: 50
-  },
-  list: {
-    marginBottom: theme.spacing(2)
-  },
-  subheader: {
-    backgroundColor: theme.palette.background.paper
-  },
-  appBar: {
-    top: "auto",
-    bottom: 0
-  },
-  grow: {
-    flexGrow: 1
-  },
-  fabButton: {
-    position: "absolute",
-    zIndex: 1,
-    top: -30,
-    left: 0,
-    right: 0,
-    margin: "0 auto"
-  }
-}));
+const db = firebase.database().ref();
 
 const TrendingCases = () => {
-  const classes = useStyles();
+  const [loan, setLoan] = useState({});
+  const [fund, setFund] = useState({});
+
+  useEffect(() => {
+    db.child('fund-raise').on('value', snapshot => {
+      if (snapshot.val() != null) {
+        setFund({
+          ...snapshot.val()
+        })
+      }
+      else {
+        setFund({});
+      }
+    })
+  }, [])
+
+  useEffect(() => {
+    db.child('loan').on('value', snapshot => {
+      if (snapshot.val() != null) {
+        setLoan({
+          ...snapshot.val()
+        })
+      }
+      else {
+        setLoan({});
+      }
+    })
+  }, [])
 
   return (
     <>
-      <Typography className={classes.text} variant="h5" gutterBottom>
-        Trending Cases
-      </Typography>
-      <div className="row">
-        <Cases />
-        <Cases />
-        <Cases />
-      </div>
+      <div>
+     <h1 className="text-start mt-5">
+       Trending Cases
+     </h1>
+     </div>
+      
+     <div className="container-fluid mb-5">
+        <div className="row">
+            <div className="col-12 mx-auto">
+                <div className="row gy-4">
+                    {
+                       Object.keys(fund).map(id => {
+                         
+                         return(
+                           <LoanFundCard
+                            title={fund[id].title}
+                            description= {fund[id].description}
+                            image={fund[id].imageURL}
+                            easyPaisaAccount={fund[id].easyPaisaAccount}
+                            keys={id}
+                            />
+                          
+                         )
+                       })
+                    }
+
+                    {
+                       Object.keys(loan).map(id => {
+                         
+                         return(
+                           <LoanFundCard
+                            title={loan[id].title}
+                            description= {loan[id].description}
+                            image={loan[id].imageURL}
+                            easyPaisaAccount={loan[id].easyPaisaAccount}
+                            keys={id}
+                            />
+                          
+                         )
+                       })
+                    }                            
+                </div>
+            </div>
+        </div>
+    </div>
+
     </>
   );
 };

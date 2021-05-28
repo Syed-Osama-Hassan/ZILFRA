@@ -20,7 +20,7 @@ export default function Analytics() {
     // Fetching data
     useEffect(() => {
         fetchData();
-    }, [data])
+    }, [])
 
     const fetchData = async () => {
         // For loan

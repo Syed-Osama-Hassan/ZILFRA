@@ -5,9 +5,11 @@ const Contributor = () => {
     return (
         <div>
             <Appbar />
-            <h2>
+            <div>
+                <h2 className="text-center mt-5">
                 Contributors
-            </h2>
+                </h2>
+             </div>
         </div>
     )
 }
