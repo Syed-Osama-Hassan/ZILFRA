@@ -29,7 +29,7 @@ const LoanCases = () => {
        Loan Cases
      </h2>
      </div>
-     <div className="container-fluid mb-5">
+     <div className="container-fluid mt-4 mb-5">
         <div className="row">
             <div className="col-10 mx-auto">
                 <div className="row gy-4">
@@ -42,7 +42,9 @@ const LoanCases = () => {
                             image={loan[id].imageURL}
                             easyPaisaAccount={loan[id].easyPaisaAccount}
                             amount = {loan[id].amount}
-                            keys={id}
+                            key={id}
+                            id={id}
+                            path="Loan-Cases"
                             />
                          )
                        })

@@ -20,7 +20,7 @@ const FrCases = () => {
       }
     })
   }, [])
-
+  
   return (
     <div>
      <Appbar />
@@ -30,7 +30,7 @@ const FrCases = () => {
      </h2>
      </div>
      
-     <div className="container-fluid mb-5">
+     <div className="container-fluid mt-4 mb-5">
         <div className="row">
             <div className="col-10 mx-auto">
                 <div className="row gy-4">
@@ -43,7 +43,9 @@ const FrCases = () => {
                             image={fund[id].imageURL}
                             easyPaisaAccount={fund[id].easyPaisaAccount}
                             amount = {fund[id].amount}
-                            keys= {id}
+                            id= {id}
+                            key={id}
+                            path="FundRaiser-Cases"
                             />
                          )
                        })

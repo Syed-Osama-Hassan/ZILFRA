@@ -113,16 +113,14 @@ const Loan = () => {
                         <i className="far fa-trash-alt"></i>
                       </Button>
                     </td>
-                  </tr>
-                  : ''
+                  </tr>: ''
               })
             }
-
           </tbody>
         </table>
         </div>
-      </Container><br /><br /><br /> <hr /><br /><br /><br />
-      {/* <LoanCases/> */}
+      </Container>
+      <br /><br /><br /> <hr /><br /><br /><br />
     </>
   );
 }

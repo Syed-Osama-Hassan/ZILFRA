@@ -47,7 +47,7 @@ const TrendingCases = () => {
             <div className="col-12 mx-auto">
                 <div className="row gy-4">
                     {
-                       Object.keys(fund).map(id => {
+                       Object.keys(fund).slice(0,3).map(id => {
                          
                          return(
                            <LoanFundCard
@@ -56,7 +56,9 @@ const TrendingCases = () => {
                             image={fund[id].imageURL}
                             easyPaisaAccount={fund[id].easyPaisaAccount}
                             amount={fund[id].amount}
-                            keys={id}
+                            key={id}
+                            id={id}
+                            path="FundRaiser-Cases"
                             />
                           
                          )
@@ -64,7 +66,7 @@ const TrendingCases = () => {
                     }
 
                     {
-                       Object.keys(loan).map(id => {
+                       Object.keys(loan).slice(0,3).map(id => {
                          
                          return(
                            <LoanFundCard
@@ -73,7 +75,9 @@ const TrendingCases = () => {
                             image={loan[id].imageURL}
                             easyPaisaAccount={loan[id].easyPaisaAccount}
                             amount={loan[id].amount}
-                            keys={id}
+                            key={id}
+                            id= {id}
+                            path="Loan-Cases"
                             />
                           
                          )

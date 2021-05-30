@@ -17,7 +17,8 @@ import Login from "./Components/login/login"
 import Signup from "./Components/signup/signup"
 import ForgotPassword from "./Components/ForgotPassword/ForgotPassword"
 import Analytics from "./Components/Analytics/Analytics"
-import Error from "./Components/Error/Error"
+import Error from "./Components/Error/Error";
+import Details from './Components/Details/Details';
 import UpdateProfile from "./Components/UpdateProfile/UpdateProfile"
 import {AuthProvider} from "./Components/contexts/AuthContext";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute"
@@ -32,16 +33,20 @@ return(
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/forgot-password" component={ForgotPassword} />
             <PrivateRoute exact path="/Home" component={Home}/>
+            <PrivateRoute exact path="/Home/:id" component={Details} />
             <PrivateRoute  exact path="/Contact" component={Contact}/>
             <PrivateRoute  exact path="/Service" component={Service}/>
             <PrivateRoute  exact path="/Loan" component={Loan}/>
             <PrivateRoute  exact path="/Contributor" component={Contributors}/>
             <PrivateRoute exact path="/Loan-Cases" component={LoanCases}/>
+            <PrivateRoute exact path="/Loan-Cases/:id" component={Details} />
             <PrivateRoute  exact path="/FundRaiser" component={FundRaiser}/>
             <PrivateRoute  exact path="/FundRaiser-Cases" component={FrCases}/>
+            <PrivateRoute exact path="/FundRaiser-Cases/:id" component={Details} />
             <PrivateRoute path="/update-profile" component={UpdateProfile}/>
             <PrivateRoute  exact path="/Draw" component={Draw}/>
             <PrivateRoute  exact path="/Draw-Cases" component={DCases}/>
+            <PrivateRoute exact path="/Draw-Cases/:id" component={Details} />
             <PrivateRoute  exact path="/Analytics" component={Analytics}/>
             <Route path="*" component={Error}/>
             </Switch>
