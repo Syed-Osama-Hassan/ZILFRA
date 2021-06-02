@@ -74,7 +74,6 @@ export default function Analytics() {
         currentUserData.reverse().pop();
     }
 
-    console.log("data: ", data)
     return (
         <div>
             <NavBar />
