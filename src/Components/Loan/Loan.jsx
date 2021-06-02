@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LoanForm from "./LoanForm";
-import LoanCases from "./LoanCases";
 import firebase from '../../firebase';
-import { Container, Button, Navbar, Nav } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import { useAuth } from '../contexts/AuthContext';
 
 const db = firebase.database().ref();

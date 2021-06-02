@@ -22,6 +22,8 @@ import Details from './Components/Details/Details';
 import UpdateProfile from "./Components/UpdateProfile/UpdateProfile"
 import {AuthProvider} from "./Components/contexts/AuthContext";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute"
+import Donations from './Components/Donations/Donations'
+import Participation from './Components/Participate/Participate';
 
 const App = () => {
 return(
@@ -48,6 +50,9 @@ return(
             <PrivateRoute  exact path="/Draw-Cases" component={DCases}/>
             <PrivateRoute exact path="/Draw-Cases/:id" component={Details} />
             <PrivateRoute  exact path="/Analytics" component={Analytics}/>
+            <PrivateRoute exact path="/loan/Donation/:id" component={Donations}/>
+            <PrivateRoute exact path="/fund/Donation/:id" component={Donations}/>
+            <PrivateRoute exact path="/Participate/:id" component={Participation}/>
             <Route path="*" component={Error}/>
             </Switch>
             </AuthProvider>

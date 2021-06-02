@@ -33,12 +33,11 @@ const Home = () => {
                   />
                 </div>
                 </div>
-              <br />
-              <TrendingCases />
             </div>
           </div>
         </div>
       </section>
+      <TrendingCases />
     </>
   );
 };

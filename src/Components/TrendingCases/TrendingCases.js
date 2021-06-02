@@ -36,15 +36,15 @@ const TrendingCases = () => {
 
   return (
     <>
-      <div>
-     <h1 className="text-start mt-5">
+    <div>
+     <h1 className="text-center mt-5">
        Trending Cases
      </h1>
      </div>
       
-     <div className="container-fluid mb-5">
+     <div className="container-fluid mt-5 mb-5">
         <div className="row">
-            <div className="col-12 mx-auto">
+            <div className="col-10 mx-auto">
                 <div className="row gy-4">
                     {
                        Object.keys(fund).slice(0,3).map(id => {
