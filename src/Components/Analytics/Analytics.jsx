@@ -9,6 +9,7 @@ const db = firebase.database().ref();
 
 export default function Analytics() {
     const { currentUser } = useAuth();
+    var currentUserData = [{}]
     // Initial data
     const [data, setData] = useState({
         "loan": "",
@@ -24,36 +25,36 @@ export default function Analytics() {
 
     const fetchData = async () => {
         // For loan
-        var l;
-        var f;
-        var d;
-        var key;
-        var i;
+        var l=0;
+        var f=0;
+        var d=0;
+        
         db.child('loan').on('value', snapshot => {
-            key = Object.entries(snapshot.val());
-            i = key[0][1].email;
-            if(i == currentUser.email){
+            var key = Object.entries(snapshot.val());
+            
+            search(key)            
             if (snapshot.val() != null) {
-                l = Object.keys(snapshot.val()).length
+                l = currentUserData.length
             }
-        }
         })
 
         //For Fund Raise
         db.child('fund-raise').on('value', snapshot => {
-            if(i == currentUser.email){
+            var key = Object.entries(snapshot.val());
+            
+            search(key)
             if (snapshot.val() != null) {
-                f = Object.keys(snapshot.val()).length
+                f = currentUserData.length
             }
-        }
         })
         // For Draw
         db.child('draw').on('value', snapshot => {
-            if(i == currentUser.email){
+            var key = Object.entries(snapshot.val());
+            
+            search(key)
             if (snapshot.val() != null) {
-                d = Object.keys(snapshot.val()).length
+                d = currentUserData.length
             }
-        }
         })
         //Setting data
         setData({ "loan": l, "fund": f, "Draw": d });
@@ -62,6 +63,18 @@ export default function Analytics() {
     if(!ready){
         return <h2>Loading...</h2>
     }
+
+    function search(data) {
+        currentUserData = [{}]
+        for(var key=0; key < data.length; key++ ){
+            if(data[key][1].email == currentUser.email){
+                currentUserData.push(data[key]);
+            }
+        }
+        currentUserData.reverse().pop();
+    }
+
+    console.log("data: ", data)
     return (
         <div>
             <NavBar />
