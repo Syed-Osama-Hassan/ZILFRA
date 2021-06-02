@@ -71,7 +71,7 @@ const Details = () => {
                                     <h6 className="card-subtitle mb-2 text-muted">EasyPaisa Account: {loan[id]['easyPaisaAccount']}</h6>
                                     <h6 className="card-subtitle mb-2 text-muted">Amount: {loan[id]['amount']}</h6>
                                     <h6 className="card-text">{loan[id]['description']}</h6>
-                                    <NavLink to={`/loan/Donation/${id}`} className="btn btn-dark mt-2 d-flex justify-content-center">Donate Now</NavLink>
+                                    <NavLink to={`/loan/Donation/${id}/${loan[id].email}`} className="btn btn-dark mt-2 d-flex justify-content-center">Donate Now</NavLink>
                                 </div>
                             </div>
 
@@ -90,7 +90,7 @@ const Details = () => {
                                     <h6 className="card-subtitle mb-2 text-muted">EasyPaisa Account: {fund[id]['easyPaisaAccount']}</h6>
                                     <h6 className="card-subtitle mb-2 text-muted">Amount: {fund[id]['amount']}</h6>
                                     <h6 className="card-text">{fund[id]['description']}</h6>
-                                    <NavLink to={`/fund/Donation/${id}`} className="btn btn-dark mt-2 d-flex justify-content-center">Donate Now</NavLink>
+                                    <NavLink to={`/fund/Donation/${id}/${fund[id].email}`} className="btn btn-dark mt-2 d-flex justify-content-center">Donate Now</NavLink>
                                 </div>
                             </div>
 

@@ -10,22 +10,24 @@ const db = firebase.database().ref();
 const dbStorage = firebase.storage();
 
 const Donations = () => {
-    const { id } = useParams();
+    const { id, email } = useParams();
     let { path } = useRouteMatch();
-    const getCardType = path.slice(1, path.length - 13);
+    const getCardType = path.slice(1, 5);
     const { currentUser } = useAuth();
     const [message, setMessage] = useState('');
     const [image, setImage] = useState();
     const [loading, setLoading] = useState(false);
     const [donationObjects, setDonation] = useState({});
     const [currentId, setCurrentId] = useState('');
+    const [data, setData] = useState({});
 
     const initialValues = {
         email: currentUser.email,
         amount: '',
         imageURL: '',
         id: id,
-        type: getCardType
+        type: getCardType,
+        receiverEmail: email
       }
       const [values, setValues] = useState(initialValues);
 
@@ -43,9 +45,38 @@ const Donations = () => {
         })
       }, [])
 
+
+      useEffect(() => {
+        if(getCardType === "loan"){
+            db.child('loan').on('value', snapshot => {
+                if (snapshot.val() != null) {
+                    setData({
+                    ...snapshot.val()
+                  })
+                }
+                else {
+                    setData({});
+                }
+              })
+        }  
+        else{
+            db.child('fund-raise').on('value', snapshot => {
+                if (snapshot.val() != null) {
+                  setData({
+                    ...snapshot.val()
+                  })
+                }
+                else {
+                    setData({});
+                }
+              })
+        }
+       
+      }, [])
+
       // Adding to database
   const addOrEdit = (obj, url) => {
-    var data = { ...obj, imageURL: url, id: id, type: getCardType };
+    var data = { ...obj, imageURL: url, id: id, type: getCardType, receiverEmail: email };
     if (currentId == '') {
       db.child('donation').push(
         data,
@@ -59,24 +90,6 @@ const Donations = () => {
         }
       )
     }
-    // Edit data
-   // else {
-      // Delete old photo
-    //   if (donationObjects[currentId].imageURL !== data.imageURL) {
-    //     dbStorage.refFromURL(donationObjects[currentId].imageURL).delete();
-    //   }
-    //   db.child(`donation/${currentId}`).set(
-    //     data,
-    //     err => {
-    //       if (err) {
-    //         console.log(err);
-    //       }
-    //       else {
-    //         setCurrentId('');
-    //       }
-    //     }
-    //   )
-    // }
   }
       const handleDataChange = e => {
         const name = e.target.name;

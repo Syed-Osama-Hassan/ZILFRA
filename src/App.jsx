@@ -50,8 +50,8 @@ return(
             <PrivateRoute  exact path="/Draw-Cases" component={DCases}/>
             <PrivateRoute exact path="/Draw-Cases/:id" component={Details} />
             <PrivateRoute  exact path="/Analytics" component={Analytics}/>
-            <PrivateRoute exact path="/loan/Donation/:id" component={Donations}/>
-            <PrivateRoute exact path="/fund/Donation/:id" component={Donations}/>
+            <PrivateRoute exact path="/loan/Donation/:id/:email" component={Donations}/>
+            <PrivateRoute exact path="/fund/Donation/:id/:email" component={Donations}/>
             <PrivateRoute exact path="/Participate/:id" component={Participation}/>
             <Route path="*" component={Error}/>
             </Switch>
