@@ -11,7 +11,8 @@ const FrForm = (props) => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [image, setImage] = useState(null);
-
+  const [invalidImg, setInvalidImg] = useState(false);
+  
   // Initial loan form values
   const initialValues = {
     email: currentUser.email,
@@ -79,9 +80,22 @@ const FrForm = (props) => {
   }
 
   const handleChange = e => {
-    if (e.target.files[0]) {
-      setImage(e.target.files[0]);
+    var fileName = document.getElementById("image").value;
+    var idxDot = fileName.lastIndexOf(".") + 1;
+
+    var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+    
+    if(e.target.files[0]){
+    if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+        setInvalidImg(false);
+        setImage(e.target.files[0]);
+        setMessage("")
+    }else{
+      setInvalidImg(true);
+      setMessage("Please select a valid image with .jpg, .jpeg, or .png extension") 
     }
+
+  }
   };
 
   return (
@@ -92,7 +106,7 @@ const FrForm = (props) => {
           <Card>
             <Card.Body>
               <h2 className="text-center mb-4">Fund Raiser Form</h2>
-              {message && <Alert variant="success">{message}</Alert>}
+              {message && <Alert variant={invalidImg === false? 'success' : "danger"}>{message}</Alert>}
               <Form name="fund-raise-form" onSubmit={handleSubmit}>
                 <Form.Group id="email">
                   <Form.Label>Email</Form.Label>
@@ -116,9 +130,9 @@ const FrForm = (props) => {
                   <Form.Control name="easyPaisaAccount" value={values.easyPaisaAccount} onChange={handleDataChange} type="tel" required></Form.Control>
                 </Form.Group><br />
                 <Form.Group>
-                  <Form.File id="image" onChange={handleChange} label="Upload picture relevant to loan" required/>
+                  <Form.File id="image" onChange={handleChange} accept=".png, .jpeg, .jpg" label="Upload picture relevant to loan" required/>
                 </Form.Group><br />
-                <Button disabled={loading} className="w-100 btn-dark" type="submit">{props.currentId == '' ? "Submit" : "Update"}</Button>
+                <Button disabled={loading, invalidImg} className="w-100 btn-dark" type="submit">{props.currentId == '' ? "Submit" : "Update"}</Button>
               </Form>
 
             </Card.Body>

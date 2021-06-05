@@ -50,7 +50,6 @@ const Contributor = () => {
                                                 <div class="card-body">
                                                     <h5 class="card-title">Contact: {contributors[id].email}</h5>
                                                     <h6 class="card-subtitle mb-2 text-muted">Amount: {contributors[id].amount}</h6>
-                                                    {/* <p class="card-text">{props.description}</p> */}
 
                                                 </div>
                                             </div>

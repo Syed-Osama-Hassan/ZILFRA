@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import firebase from '../../firebase';
 import { Form, Button, Card, Alert, Container } from 'react-bootstrap';
 import { storage } from '../../firebase';
-import { useParams, useRouteMatch } from 'react-router';
+import { Router, useParams, useRouteMatch } from 'react-router';
 
 const db = firebase.database().ref();
 const dbStorage = firebase.storage();
@@ -20,6 +20,7 @@ const Donations = () => {
     const [donationObjects, setDonation] = useState({});
     const [currentId, setCurrentId] = useState('');
     const [data, setData] = useState({});
+    const [invalidImg, setInvalidImg] = useState(false);
 
     const initialValues = {
         email: currentUser.email,
@@ -135,10 +136,24 @@ const Donations = () => {
     }
 
     const handleChange = e => {
-        if (e.target.files[0]) {
+     
+      var fileName = document.getElementById("image").value;
+      var idxDot = fileName.lastIndexOf(".") + 1;
+
+      var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+      
+      if(e.target.files[0]){
+      if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+          setInvalidImg(false);
           setImage(e.target.files[0]);
-        }
-      };
+          setMessage("")
+      }else{
+        setInvalidImg(true);
+        setMessage("Please select a valid image with .jpg, .jpeg, or .png extension") 
+      }
+
+    }
+  };
 
     return (
         <>
@@ -148,7 +163,7 @@ const Donations = () => {
           <Card>
             <Card.Body>
               <h2 className="text-center mb-4">Donation Form</h2>
-              {message && <Alert variant="success">{message}</Alert>}
+              {message && <Alert variant={invalidImg === false? 'success' : "danger"}>{message}</Alert>}
               <Form name="donation" onSubmit={handleSubmit}>
                 <Form.Group id="email">
                   <Form.Label>Email</Form.Label>
@@ -160,9 +175,10 @@ const Donations = () => {
                   <Form.Control name="amount" value={values.amount} onChange={handleDataChange} type="number" min="500" max="10000" required></Form.Control>
                 </Form.Group><br />
                 <Form.Group>
-                  <Form.File id="image" onChange={handleChange} label="Upload screenshot of easypaisa after donating" required/>
-                </Form.Group><br />
-                <Button disabled={loading} className="w-100 btn-dark" type="submit">Donate</Button>
+                  <Form.File id="image" onInput={handleChange} accept=".png, .jpeg, .jpg" label="Upload screenshot of easypaisa after donating" required/>
+                </Form.Group><br/>
+                <Button disabled={loading, invalidImg} className="w-100 btn-dark" type="submit">Donate</Button>
+                
               </Form>
 
             </Card.Body>

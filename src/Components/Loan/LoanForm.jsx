@@ -13,7 +13,7 @@ const LoanForm = (props) => {
   const [message, setMessage] = useState('');
   const [image, setImage] = useState();
   const titleRef = useRef();
-
+  const [invalidImg, setInvalidImg] = useState(false);
 
   // Initial loan form values
   const initialValues = {
@@ -85,9 +85,22 @@ const LoanForm = (props) => {
   }
 
   const handleChange = e => {
-    if (e.target.files[0]) {
-      setImage(e.target.files[0]);
+    var fileName = document.getElementById("image").value;
+    var idxDot = fileName.lastIndexOf(".") + 1;
+
+    var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+    
+    if(e.target.files[0]){
+    if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+        setInvalidImg(false);
+        setImage(e.target.files[0]);
+        setMessage("")
+    }else{
+      setInvalidImg(true);
+      setMessage("Please select a valid image with .jpg, .jpeg, or .png extension") 
     }
+
+  }
   };
 
   return (
@@ -98,7 +111,7 @@ const LoanForm = (props) => {
           <Card>
             <Card.Body>
               <h2 className="text-center mb-4">Loan Form</h2>
-              {message && <Alert variant="success">{message}</Alert>}
+              {message && <Alert variant={invalidImg === false? 'success' : "danger"}>{message}</Alert>}
               <Form name="loan-form" onSubmit={handleSubmit}>
                 <Form.Group id="email">
                   <Form.Label>Email</Form.Label>
@@ -124,7 +137,7 @@ const LoanForm = (props) => {
                 <Form.Group>
                   <Form.File id="image" onChange={handleChange} label="Upload picture relevant to loan" accept=".png, .jpeg, .jpg" required/>
                 </Form.Group><br />
-                <Button disabled={loading} className="w-100 btn-dark" type="submit">{props.currentId == ''? "Submit" : "Update"}</Button>
+                <Button disabled={loading, invalidImg} className="w-100 btn-dark" type="submit">{props.currentId == ''? "Submit" : "Update"}</Button>
               </Form>
 
             </Card.Body>
