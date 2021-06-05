@@ -122,7 +122,7 @@ const LoanForm = (props) => {
                   <Form.Control name="easyPaisaAccount" value={values.easyPaisaAccount} onChange={handleDataChange} type="tel" required></Form.Control>
                 </Form.Group><br />
                 <Form.Group>
-                  <Form.File id="image" onChange={handleChange} label="Upload picture relevant to loan" required/>
+                  <Form.File id="image" onChange={handleChange} label="Upload picture relevant to loan" accept=".png, .jpeg, .jpg" required/>
                 </Form.Group><br />
                 <Button disabled={loading} className="w-100 btn-dark" type="submit">{props.currentId == ''? "Submit" : "Update"}</Button>
               </Form>

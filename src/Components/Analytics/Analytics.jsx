@@ -20,7 +20,9 @@ export default function Analytics() {
 
     // Fetching data
     useEffect(() => {
-        fetchData();
+        fetchData().then(
+            setReady(true)
+        );
     }, [])
 
     const fetchData = async () => {
@@ -58,11 +60,7 @@ export default function Analytics() {
         })
         //Setting data
         setData({ "loan": l, "fund": f, "Draw": d });
-        setReady(true);
 }
-    if(!ready){
-        return <h2>Loading...</h2>
-    }
 
     function search(data) {
         currentUserData = [{}]
@@ -74,11 +72,17 @@ export default function Analytics() {
         currentUserData.reverse().pop();
     }
 
+    if(!ready){
+        return <h2>Loading...</h2>
+    }
+
     return (
         <div>
             <NavBar />
-            <Cards data={data} />
-            <Charts data={data} />
+            <div>
+                <Cards data={data} />
+                <Charts className="ml-4" data={data} />
+            </div>
         </div>
     )
 }

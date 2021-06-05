@@ -22,10 +22,6 @@ const useStyles = makeStyles({
 
 const Cards = ({ data }) => {
     const classes = useStyles();
-
-    // if(!confirmed){
-    //     return "Loading...";
-    // }
     
     return (
        <div className={styles.container}>
@@ -36,7 +32,6 @@ const Cards = ({ data }) => {
                     Loan
                     </Typography>
                     <Typography variant="h5">
-                    {/* {confirmed.value} */}
                     {data.loan}
                     </Typography>
                     <Typography variant="body2">
@@ -51,7 +46,6 @@ const Cards = ({ data }) => {
                     Fund Raise
                     </Typography>
                     <Typography variant="h5">
-                    {/* {recovered.value} */}
                     {data.fund}
                     </Typography>
                     <Typography variant="body2">
@@ -66,7 +60,6 @@ const Cards = ({ data }) => {
                     Draw
                     </Typography>
                     <Typography variant="h5">
-                    {/* {deaths.value} */}
                     {data.Draw}
                     </Typography>
                     <Typography variant="body2">

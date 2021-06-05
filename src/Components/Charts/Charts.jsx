@@ -20,9 +20,10 @@ const Chart = ({data}) => {
                 legend: {display: false},
                 title: {display: true},
                 scales:{
-                    yAxes: [{
+                    yAxes: [{                        
                         ticks:{
-                            min: 0
+                            min: 0,                            
+                            fontSize: 20
                         }
                     }]
                 }
